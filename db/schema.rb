@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_224722) do
+ActiveRecord::Schema.define(version: 2019_05_10_000641) do
 
   create_table "choruses", force: :cascade do |t|
     t.string "name"
@@ -24,6 +24,11 @@ ActiveRecord::Schema.define(version: 2019_05_06_224722) do
     t.integer "chorus_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "section_leader"
+    t.boolean "baritone"
+    t.boolean "bass"
+    t.boolean "lead"
+    t.boolean "tenor"
   end
 
   create_table "singers", force: :cascade do |t|
