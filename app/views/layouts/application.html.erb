@@ -10,6 +10,16 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav>
+      <div class="nav-wrapper red darken-4">
+        <%= link_to (image_tag ("treble-logo.png"), class: "responsive-img left brand-logo", size: "28"), "#" %>
+        <div class="brand-logo center">
+        <%= link_to "Music Meeting Mastermind", "/" %>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
