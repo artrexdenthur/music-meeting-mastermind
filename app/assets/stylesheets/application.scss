@@ -19,3 +19,22 @@
  .brand-logo {
    padding-left: 12px
  }
+
+ .nav-link {
+  padding-right: 20px
+ }
+
+ .alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+.alert-success {
+  background-color: green;
+}
+
+.alert-warning {
+  background-color: orange;
+}
