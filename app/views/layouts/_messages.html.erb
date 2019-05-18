@@ -1,8 +1,10 @@
-<% flash.each do |k, v| %>
-  <d class="alert alert-<%= key %>">
-    <a href="#" data-dismiss="alert" class="close">x</a>
-    <ul>
-      <li><%= v %></li>
-    </ul>
-  </d>
-<% end %>
+<ul>
+  <% flash.each do |k, mess| %>
+    <li>
+      <p class="alert alert-<%= k %>">
+        <%= mess %>
+        <a href="#" data-dismiss="alert" class="close">x</a>
+      </p>
+    </li>
+  <% end %>
+</ul>
