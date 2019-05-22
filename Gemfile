@@ -49,7 +49,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   # Load environment variables with dotenv
-  gem 'dotenv'
+  gem 'dotenv-rails'
 end
 
 group :development do
