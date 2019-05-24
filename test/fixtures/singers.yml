@@ -1,9 +1,26 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyText
-  preferred_voice_part: MyText
+tenor:
+  name: tenor singer
+  preferred_voice_part: tenor
+  choruses: big, med, small
 
-two:
-  name: MyText
-  preferred_voice_part: MyText
+lead:
+  name: lead singer
+  preferred_voice_part: lead
+  choruses: big, med, small
+
+baritone:
+  name: baritone singer
+  preferred_voice_part: baritone
+  choruses: big, med, small
+
+bass:
+  name: bass singer
+  preferred_voice_part: bass
+  choruses: big, med, small
+
+wild_high:
+  name: wild high singer
+  preferred_voice_part: lead
+  choruses: big, med, small

@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2019_05_18_171611) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.integer "singer_id"
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
