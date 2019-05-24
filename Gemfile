@@ -50,6 +50,7 @@ group :development, :test do
 
   # Load environment variables with dotenv
   gem 'dotenv-rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do
