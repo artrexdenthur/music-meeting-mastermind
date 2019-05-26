@@ -1,23 +1,22 @@
-<%= form_for(@singer) do |f| %>
+<%= form_for(singer) do |f| %>
   <p><%= f.label :name %></p>
-  <p><%= f.text_box_field :name %></p>
+  <p><%= f.text_field :name %></p>
   <br>
   <p><%= f.label :preferred_voice_part %></p>
-  <p><%= f.text_box_field :preferred_voice_part %></p>
+  <p><%= f.text_field :preferred_voice_part %></p>
   <br>
-  <p>Choruses: (more can be set after account creation)</p>
-  <ul>
-    <%= f.fields_for :memberships do |mem_f| %>
-      <%= mem_f.collection_select :chorus_id, Chorus.all, :id, :name, :include_blank, prompt: 'Select current chorus' %>
-      Part: 
-      <%= mem_f.check_box :baritone %>
-      <%= mem_f.check_box :bass %>
-      <%= mem_f.check_box :lead %>
-      <%= mem_f.check_box :tenor %>
+  <p>Choruses: </p>
+    <% singer.memberships.each do |m| %>
+      <%= f.fields_for m do |mem_f| %>
+        <p><%= mem_f.label m.chorus.name %></p>
+      <% end %>
+    <% end %>
+    <%= f.fields_for singer.memberships.build do |mem_f| %>
+      <%= mem_f.collection_select :chorus_id, Chorus.all, :id, :name, {include_blank: true, prompt: 'Select current chorus'}, {class: 'browser-default'} %>
+      <%= render 'parts', membership_form: mem_f %>
     <% end %>
     <p><%= f.label :preferred_voice_part %></p> # voice part in that chorus?
-    <p><%= f.text_box_field :preferred_voice_part %></p>
+    <p><%= f.text_field :preferred_voice_part %></p>
     <br>
-  </ul>
 
 <% end %>

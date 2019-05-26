@@ -3,8 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook]
-  has_one :singer
+  has_one :singer, dependent: :destroy
+  after_create :init_singer
   # has_secure_password
+
+  def init_singer
+    self.create_singer!
+  end
   
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

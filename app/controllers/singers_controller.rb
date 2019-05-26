@@ -27,7 +27,16 @@ class SingersController < ApplicationController
   end
 
   def edit
-    # require user login
+    unless current_user.admin
+      # ignore the param for most users, they may only edit their own profile
+      @singer = Singer.find_by_id(current_user.singer)
+    else
+      @singer = Singer.find_by_id(params[:id])
+      unless @singer
+        flash.notice = "No such profile"
+        return redirect_to singers_path
+      end
+    end
   end
 
   def update
