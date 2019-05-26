@@ -1,0 +1,11 @@
+<h1><%= @chorus.name %> Membership</h1>
+<%= render @singers, chorus: @chorus %>
+<!--
+<ul>
+  , <%= get_link %>
+  <%= @singers.each do |s| %>
+    <li><%= link_to s.name, chorus_singer_path(@chorus, s) %>, <%= get_linked_parts(get_membership(@chorus, s))%></li>
+  <% end %>
+  <%  %>
+</ul>
+-->

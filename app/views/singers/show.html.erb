@@ -1,0 +1,12 @@
+<h1><%= @singer.name %></h1>
+<br>
+<p><strong>Memberships:</strong></p>
+<ul>
+  <% if @singer.memberships.count == 0 %>
+    <p>No chorus memberships yet!</p>
+  <% else %>
+    <% @singer.memberships.each do |m| %>
+      <li><%= link_to m.chorus.name, chorus_path(m.chorus) %>: <%= get_formatted_parts(m) %></li>
+    <% end %>
+  <% end %>
+</ul>

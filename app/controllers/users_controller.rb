@@ -3,4 +3,8 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     return redirect_to root_path unless @user
   end
+
+  def index
+    @users = User.all
+  end
 end
