@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_18_171611) do
+ActiveRecord::Schema.define(version: 2019_05_25_213347) do
 
   create_table "choruses", force: :cascade do |t|
     t.string "name"
     t.integer "type_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -41,7 +42,7 @@ ActiveRecord::Schema.define(version: 2019_05_18_171611) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.integer "singer_id"
-    t.boolean "admin", default: false
+    t.boolean "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
