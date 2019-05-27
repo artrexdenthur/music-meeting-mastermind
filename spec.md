@@ -2,8 +2,8 @@
 
 Specs:
 - [x] Using Ruby on Rails for the project - Self Explanatory
-- [ ] Include at least one has_many relationship (x has_many y; e.g. User has_many Recipes) - User has_many Choruses
-- [ ] Include at least one belongs_to relationship (x belongs_to y; e.g. Post belongs_to User)
+- [x] Include at least one has_many relationship (x has_many y; e.g. User has_many Recipes) - User has_many Choruses
+- [x] Include at least one belongs_to relationship (x belongs_to y; e.g. Post belongs_to User)
 - [x] Include at least two has_many through relationships (x has_many y through z; e.g. Recipe has_many Items through Ingredients) - Singer has_many Choruses through Memberships, and vice-versa
 - [x] Include at least one many-to-many relationship (x has_many y through z, y has_many x through z; e.g. Recipe has_many Items through Ingredients, Item has_many Recipes through Ingredients) - See above
 - [x] The "through" part of the has_many through includes at least one user submittable attribute, that is to say, some attribute other than its foreign keys that can be submitted by the app's user (attribute_name e.g. ingredients.quantity) - (implement in forms) A singer has a part in a chorus that is determined by the membership
@@ -12,9 +12,9 @@ Specs:
 - [x] Include signup (how e.g. Devise) - Devise
 - [x] Include login (how e.g. Devise) - Devise
 - [x] Include logout (how e.g. Devise) - Devise
-- [ ] Include third party signup/login (how e.g. Devise/OmniAuth) - Devise/OmniAuth Facebook
-- [ ] Include nested resource show or index (URL e.g. users/2/recipes) - users/x/choruses
-- [ ] Include nested resource "new" form (URL e.g. recipes/1/ingredients/new) - Create new chorus
+- [x] Include third party signup/login (how e.g. Devise/OmniAuth) - Devise/OmniAuth Facebook
+- [x] Include nested resource show or index (URL e.g. users/2/recipes) - users/x/choruses
+- [x] Include nested resource "new" form (URL e.g. recipes/1/ingredients/new) - Create new chorus
 - [ ] Include form display of validation errors (form URL e.g. /recipes/new) - flash me up baby
 
 Confirm:

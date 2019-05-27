@@ -8,23 +8,26 @@ class MembersController < ApplicationController
   def show
     @chorus, @singer = Chorus.find_by_id(params[:chorus_id]), Singer.find_by_id(params[:id])
     @membership = @singer.memberships.find_by(chorus_id: @chorus.id)
+    byebug
   end
 
   def new
     @chorus = Chorus.find_by_id(params[:chorus_id])
     redirect_to chorus_members_path unless user_signed_in? && (@chorus.user == current_user || current_user.admin)
-    @singer = Singer.new 
-    @singer.memberships.first.chorus = @chorus
+    @singer = @chorus.members.build
+    @singer.choruses << @chorus
   end
 
   def create
     @chorus = Chorus.find_by_id(params[:chorus_id])
     redirect_to chorus_members_path unless user_signed_in? && (@chorus.user == current_user || current_user.admin)
     @singer = Singer.create(member_params)
+    byebug
     unless @singer.save
-      @singer.memberships.new
       return render 'new'
     else
+      @singer.remove_blank_memberships!
+      @singer.memberships.all.each { |m| m.save }
       return redirect_to chorus_member_path(@chorus, @singer)
     end
   end

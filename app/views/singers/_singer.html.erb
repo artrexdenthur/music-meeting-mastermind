@@ -4,7 +4,9 @@
   <h4><%= link_to singer.name, singer_path(singer) %></h4>
   <ul>
     <% singer.memberships.each do |m| %>
+      <% if m.valid? %>
       <li><%= link_to m.chorus.name, chorus_path(m.chorus) %>: <%= get_linked_parts(m) %></li>
+      <% end %>
     <% end %>
   </ul>
 <% end %>

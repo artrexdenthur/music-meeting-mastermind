@@ -33,7 +33,7 @@ module MembershipsHelper
   end
 
   def chorus_admin(chorus)
-    current_user.choruses.include?(chorus)
+    current_user.choruses.include?(chorus) || current_user.admin
   end
   
 end
