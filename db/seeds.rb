@@ -13,8 +13,8 @@ tenor_doug = Singer.find_or_create_by(name: "Doug Wehrwein")
 tb = Singer.find_or_create_by(name: "Keith Waldheim")
 bl = Singer.find_or_create_by(name: "Wes Short")
 
-admin = User.find_or_create_by(admin: true, email: "paul.ashour@gmail.com", singer: bari_paul) do |user|
-  user.password = "asdfasdf"
+admin = User.find_or_create_by(admin: true, email: "paul.ashour@gmail.com", profile: bari_paul) do |user|
+  user.password = ""
   puts user.profile
 end
 sor_user = User.find_or_create_by(email: "sor@sor.sor") do |user|
