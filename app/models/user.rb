@@ -3,13 +3,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook]
-  has_one :singer, dependent: :destroy
-  accepts_nested_attributes_for :singer, reject_if: :all_blank
-  after_initialize :init_singer
+  has_one :profile, class_name: 'Singer', dependent: :destroy
+  accepts_nested_attributes_for :profile, reject_if: :all_blank
+  after_initialize :init_profile
+  has_many :singers
+  has_many :choruses
   # has_secure_password
 
-  def init_singer
-    build_singer if singer == nil
+  def init_profile
+    build_profile if profile == nil
     true
   end
   

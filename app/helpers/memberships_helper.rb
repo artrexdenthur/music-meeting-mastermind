@@ -31,5 +31,9 @@ module MembershipsHelper
   def get_membership(chorus, singer)
     Membership.find_by(chorus_id: chorus.id, singer_id: singer.id)
   end
+
+  def chorus_admin(chorus)
+    current_user.choruses.include?(chorus)
+  end
   
 end

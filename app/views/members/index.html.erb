@@ -1,2 +1,7 @@
 <h1><%= @chorus.name %> Membership</h1>
 <%= render @singers, chorus: @chorus %>
+<% if chorus_admin(@chorus) %>
+  <%= button_to "New member", new_chorus_member_path(@chorus), class: "btn" %>
+<% end %>
+
+&nbsp;
