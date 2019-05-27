@@ -2,7 +2,7 @@ class ChorusesController < ApplicationController
   
   # should all chorus access be limited to users? Probably not?
   def index
-
+    @choruses = Chorus.all
   end
 
   def new

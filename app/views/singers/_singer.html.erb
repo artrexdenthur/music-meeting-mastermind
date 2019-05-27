@@ -1,5 +1,5 @@
 <% if local_assigns[:chorus] %>
-  <p><%= link_to singer.name, chorus_singer_path(chorus, singer) %>, <%= get_linked_parts(get_membership(chorus, singer))%></p>
+  <p><%= link_to singer.name, chorus_member_path(chorus, singer) %>, <%= get_linked_parts(get_membership(chorus, singer))%></p>
 <% else %>
   <h4><%= link_to singer.name, singer_path(singer) %></h4>
   <ul>

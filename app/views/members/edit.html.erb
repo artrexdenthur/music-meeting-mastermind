@@ -1,5 +1,5 @@
 <%= render 'layouts/model_errors', model: @singer %>
-<%= form_for @singer, url: chorus_member_path(@chorus, @singer) do |f| %>
+<%= form_for @singer, url: url_for(controller: 'members', action: 'update') do |f| %>
   <%= render 'singers/form', f: f %>
 <% end %>
 <%= form_for @singer, method: :delete do |f| %>

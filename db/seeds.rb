@@ -60,4 +60,6 @@ wc.memberships.find_or_create_by(baritone: true, singer_id: bl.id)
     s = Singer.create(name: Faker::Name.name)
     cho.memberships.create(tenor: true, singer_id: s.id)
   end
+
+  Singer.all.each { |s| s.save }
 end

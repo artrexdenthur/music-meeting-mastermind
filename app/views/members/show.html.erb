@@ -1,3 +1,3 @@
 <h1><%= @chorus.name%>: <%= @singer.name %></h1>
 <h2><%= get_linked_parts(@membership) %></h2>
-<%= gated_edit_button @singer, @chorus %>
+<%= gated_edit_button @singer, edit_chorus_member_path(@chorus, @singer) %>

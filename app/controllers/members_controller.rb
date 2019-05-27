@@ -6,7 +6,7 @@ class MembersController < ApplicationController
   end
 
   def show
-    @singer, @chorus = Chorus.find_by_id(params[:chorus_id]), Singer.find_by_id(params[:id])
+    @chorus, @singer = Chorus.find_by_id(params[:chorus_id]), Singer.find_by_id(params[:id])
     @membership = @singer.memberships.find_by(chorus_id: @chorus.id)
   end
 

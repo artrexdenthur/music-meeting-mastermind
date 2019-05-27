@@ -1,8 +1,8 @@
 module UsersHelper
-  def gated_edit_button(resource, *resources)
+  def gated_edit_button(resource, link, *resources)
     # byebug
     if user_signed_in? && (resource.user == current_user || resources.any? { |r| r.user == current_user} || current_user.admin)
-      link_to "edit", [:edit, resource]
+      link_to "edit", link
     end
   end
 end
