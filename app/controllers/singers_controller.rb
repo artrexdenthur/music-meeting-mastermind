@@ -36,11 +36,29 @@ class SingersController < ApplicationController
         flash.notice = "No such profile"
         return redirect_to singers_path
       end
+      @singer.memberships.new
     end
   end
 
   def update
-    # require user login
+    @singer = Singer.find_by_id(params[:id])
+    unless @singer
+      flash.notice = "resource does not exist"
+      return redirect_to root_path
+    end
+    unless @singer.user == current_user || current_user.admin
+      flash.warning = "Action not authorized"
+      return redirect_to singer_path(@singer)
+    else
+      @singer.update(singer_params)
+      unless @singer.save
+        byebug
+        flash.notice = "There were some errors"
+        render 'edit'
+      else
+        return redirect_to singer_path(@singer)
+      end
+    end
   end
 
   def delete
@@ -50,6 +68,18 @@ class SingersController < ApplicationController
   private
 
   def singer_params #TODO
-    params.require(:singer).permit()
+    params.require(:singer).permit(
+      :name, :preferred_voice_part, :id,
+      memberships_attributes: [
+        :id,
+        :singer_id,
+        :chorus_id,
+        :baritone,
+        :bass,
+        :lead,
+        :tenor,
+        :section_leader
+      ]
+      )
   end
 end

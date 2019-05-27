@@ -1,5 +1,5 @@
 class Chorus < ApplicationRecord
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :members, through: :memberships, source: :singer
   has_many :leads, -> {leads.distinct}, through: :memberships, source: :singer # '->' adds a scope to the association
   has_many :basses, -> {basses.distinct}, through: :memberships, source: :singer # '->' adds a scope to the association
