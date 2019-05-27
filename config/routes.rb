@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       get 'leads'
       get 'tenors'
     end
-    resources :singers, only: [:index, :show], controller: 'members'
+    resources :singers, controller: 'members', as: 'members'
   end
   resources :chorus
   resources :singers

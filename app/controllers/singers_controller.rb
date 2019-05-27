@@ -13,7 +13,8 @@ class SingersController < ApplicationController
   def create
     @singer = Singer.create(singer_params)
     unless @singer.save
-      flash.notice = "Errors have occurred."
+      flash.notice << "Errors have occurred."
+      flash.notice << @singer.errors.full_messages
       return render 'new'
     else
       return redirect_to singer_path(@singer)
@@ -64,13 +65,16 @@ class SingersController < ApplicationController
     end
   end
 
-  def delete
-    # require user login
+  def destroy
+    @singer = Singer.find_by_id(params[:id])
+    return redirect_to singer_path(@singer) unless user_signed_in? && (@singer.user == current_user || current_user.admin)
+    @singer.destroy
+    redirect_to singers_path
   end
 
   private
 
-  def singer_params #TODO
+  def singer_params 
     params.require(:singer).permit(
       :name, :preferred_voice_part, :id,
       memberships_attributes: [

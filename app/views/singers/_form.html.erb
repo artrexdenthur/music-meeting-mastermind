@@ -1,4 +1,4 @@
-<%= form_for(singer) do |f| %>
+<%= form_for(singer, url: target) do |f| %>
   <p><%= f.label :name %></p>
   <p><%= f.text_field :name %></p>
   <br>
@@ -10,7 +10,7 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title"><%= mem_f.collection_select :chorus_id, Chorus.all, :id, :name, {include_blank: true, prompt: 'Select chorus'}, {class: 'browser-default'} %></span>
-        <%= render 'parts', membership_form: mem_f %>
+        <%= render 'singers/parts', membership_form: mem_f %>
       </div>
     </div>
       <% end %>
