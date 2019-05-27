@@ -6,7 +6,8 @@
     <p>No chorus memberships yet!</p>
   <% else %>
     <% @singer.memberships.each do |m| %>
-      <li><%= link_to m.chorus.name, chorus_path(m.chorus) %>: <%= get_formatted_parts(m) %></li>
+      <li><%= link_to m.chorus.name, m.chorus %>: <%= get_formatted_parts(m) %></li>
     <% end %>
   <% end %>
 </ul>
+<%= gated_edit_button @singer %>

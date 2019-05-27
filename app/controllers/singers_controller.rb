@@ -4,8 +4,10 @@ class SingersController < ApplicationController
   end
 
   def new
-    # require user login
+    # requires site admin privileges
+    redirect_to singers_path unless user_signed_in? && current_user.admin
     @singer = Singer.new
+    @singer.memberships.new
   end
 
   def create
@@ -27,6 +29,7 @@ class SingersController < ApplicationController
   end
 
   def edit
+    return redirect_to Singer.find_by_id(params[:id]) unless user_signed_in?
     unless current_user.admin
       # ignore the param for most users, they may only edit their own profile
       @singer = Singer.find_by_id(current_user.singer)
@@ -46,7 +49,7 @@ class SingersController < ApplicationController
       flash.notice = "resource does not exist"
       return redirect_to root_path
     end
-    unless @singer.user == current_user || current_user.admin
+    unless user_signed_in? && (@singer.user == current_user || current_user.admin)
       flash.warning = "Action not authorized"
       return redirect_to singer_path(@singer)
     else

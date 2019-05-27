@@ -1,1 +1,6 @@
 <%= render 'form', singer: @singer %>
+<%= form_for @singer, method: :delete do |f| %>
+  <%= f.button "Delete Singer", class: "btn red" %>
+<% end %>
+
+&nbsp;

@@ -1,13 +1,13 @@
 module MembershipsHelper
 
   def get_formatted_parts(membership)
-    return get_parts(membership).join(', ').capitalize
+    return get_parts(membership).map { |p| p.to_s.capitalize }.join(', ')
   end
 
   def get_linked_parts(membership)
     link_arr = []
     get_parts(membership).each do |p|
-      link_arr << link_to(p, "/choruses/#{membership.chorus_id}/#{p.to_s.pluralize}")
+      link_arr << link_to(p.to_s.capitalize, "/choruses/#{membership.chorus_id}/#{p.to_s.pluralize}")
     end
     return safe_join(link_arr, ', '.html_safe)
   end
