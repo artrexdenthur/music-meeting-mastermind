@@ -6,13 +6,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-     super
+    super do |user|
+      user.profile.memberships.build
+    end
   end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    configure_sign_up_params
+    byebug
+
+    super do |user|
+      if user.profile.memberships.count == 0
+        user.profile.memberships.build
+      end
+    end
+  end
 
   # GET /resource/edit
   # def edit
@@ -38,17 +47,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up) do |user|
+      user.permit(:email, :password, :password_confirmation, profile_attributes: [:name, :preferred_voice_part, memberships_attributes: [:chorus_id, :baritone, :bass, :lead, :tenor]])
+    end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:profile_attributes, keys: [:name, :preferred_voice_part, memberships_attributes: [:chorus_id, :baritone, :bass, :lead, :tenor]])
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
