@@ -15,15 +15,15 @@ bl = Singer.find_or_create_by(name: "Wes Short")
 
 admin = User.find_or_create_by(admin: true, email: "paul.ashour@gmail.com", singer: bari_paul) do |user|
   user.password = "asdfasdf"
-  puts user.singer
+  puts user.profile
 end
 sor_user = User.find_or_create_by(email: "sor@sor.sor") do |user|
   user.password = "asdfasdf"
-  user.singer = bass_gian
+  user.profile = bass_gian
 end
 reg_user = User.find_or_create_by(email: "test@test.test") do |user|
   user.password = "asdfasdf"
-  user.singer = tb
+  user.profile = tb
 end
 vm = Chorus.find_or_create_by(name: "Vocal Majority", user_id: admin.id)
 wc = Chorus.find_or_create_by(name: "Wesminster Chorus", user_id: admin.id)

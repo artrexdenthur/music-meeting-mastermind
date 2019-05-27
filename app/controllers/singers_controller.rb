@@ -31,7 +31,7 @@ class SingersController < ApplicationController
     return redirect_to Singer.find_by_id(params[:id]) unless user_signed_in?
     unless current_user.admin
       # ignore the param for most users, they may only edit their own profile
-      @singer = Singer.find_by_id(current_user.singer)
+      @singer = Singer.find_by_id(current_user.profile)
     else
       @singer = Singer.find_by_id(params[:id])
       @singer.memberships.new unless @singer.memberships.last.new_record?
