@@ -9,7 +9,7 @@ class User < ApplicationRecord
   # has_secure_password
 
   def init_singer
-    build_singer
+    build_singer if singer == nil
     true
   end
   
