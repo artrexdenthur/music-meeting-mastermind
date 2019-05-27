@@ -1,3 +1,4 @@
+<%= render 'layouts/model_errors', model: @singer %>
 <%= render 'singers/form', { singer: @singer, target: chorus_member_path(@chorus, @singer) } %>
 <%= form_for @singer, method: :delete do |f| %>
   <%= f.button "Delete Singer", class: "btn red" %>

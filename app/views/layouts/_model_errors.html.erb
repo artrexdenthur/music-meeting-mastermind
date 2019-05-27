@@ -1,0 +1,9 @@
+<% if model.errors.any? %>
+  <div class="alert alert-warning">
+    <a href="#" data-dismiss="alert" class="close">x&nbsp;&nbsp;</a>
+    <%= "The following errors prevented the #{model.model_name.human} from being saved:"%>
+    <% model.errors.full_messages.each do |m| %>
+      <p><%= m %></p>
+    <% end %>
+  </div>
+<% end %>

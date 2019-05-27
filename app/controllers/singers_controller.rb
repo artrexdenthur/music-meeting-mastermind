@@ -13,8 +13,7 @@ class SingersController < ApplicationController
   def create
     @singer = Singer.create(singer_params)
     unless @singer.save
-      flash.notice << "Errors have occurred."
-      flash.notice << @singer.errors.full_messages
+      @singer.memberships.new
       return render 'new'
     else
       return redirect_to singer_path(@singer)
@@ -56,8 +55,7 @@ class SingersController < ApplicationController
     else
       @singer.update(singer_params)
       unless @singer.save
-        byebug
-        flash.notice = "There were some errors"
+        # byebug
         render 'edit'
       else
         return redirect_to singer_path(@singer)
