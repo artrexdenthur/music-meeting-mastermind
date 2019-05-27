@@ -7,7 +7,6 @@ class SingersController < ApplicationController
     # requires site admin privileges
     redirect_to singers_path unless user_signed_in? && current_user.admin
     @singer = Singer.new
-    @singer.memberships.new
   end
 
   def create
@@ -35,11 +34,11 @@ class SingersController < ApplicationController
       @singer = Singer.find_by_id(current_user.singer)
     else
       @singer = Singer.find_by_id(params[:id])
+      @singer.memberships.new unless @singer.memberships.last.new_record?
       unless @singer
         flash.notice = "No such profile"
         return redirect_to singers_path
       end
-      @singer.memberships.new
     end
   end
 

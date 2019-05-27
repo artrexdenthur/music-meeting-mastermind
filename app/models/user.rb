@@ -4,11 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook]
   has_one :singer, dependent: :destroy
-  after_create :init_singer
+  accepts_nested_attributes_for :singer, reject_if: :all_blank
+  after_initialize :init_singer
   # has_secure_password
 
   def init_singer
-    self.create_singer!
+    build_singer
+    true
   end
   
   def self.from_omniauth(auth)
