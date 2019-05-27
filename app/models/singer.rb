@@ -34,4 +34,10 @@ class Singer < ApplicationRecord
   def self.basses
     joins(:memberships).where(memberships: {bass: true})
   end
+  def self.baritones
+    joins(:memberships).where(memberships: {baritone: true})
+  end
+  def self.tenors
+    joins(:memberships).where(memberships: {tenor: true})
+  end
 end

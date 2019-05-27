@@ -11,7 +11,14 @@ Rails.application.routes.draw do
     resources :singers, controller: 'members', as: 'members'
   end
   resources :chorus
-  resources :singers
+  resources :singers do
+    collection do 
+      get 'baritones'
+      get 'basses'
+      get 'leads'
+      get 'tenors'
+    end
+  end
   resources :users, only: [:index, :show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

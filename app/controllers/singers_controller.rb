@@ -69,6 +69,19 @@ class SingersController < ApplicationController
     redirect_to singers_path
   end
 
+  def baritones
+    @baritones = Singer.baritones
+  end
+  def basses
+    @basses = Singer.basses
+  end
+  def leads
+    @leads = Singer.leads
+  end
+  def tenors
+    @tenors = Singer.tenors
+  end
+
   private
 
   def singer_params 

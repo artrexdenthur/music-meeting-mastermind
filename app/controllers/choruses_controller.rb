@@ -29,22 +29,22 @@ class ChorusesController < ApplicationController
   end
 
   def baritones
-    @chorus = params[:id]
+    @chorus = Chorus.find_by_id(params[:id])
     @baritones = @chorus.baritones
   end
 
   def basses
-    @chorus = params[:id]
+    @chorus = Chorus.find_by_id(params[:id])
     @basses = @chorus.basses
   end
 
   def leads
-    @chorus = params[:id]
+    @chorus = Chorus.find_by_id(params[:id])
     @leads = @chorus.leads
   end
 
   def tenors
-    @chorus = params[:id]
+    @chorus = Chorus.find_by_id(params[:id])
     @tenors = @chorus.tenors
   end
 
