@@ -5,7 +5,7 @@
   <ul>
     <% singer.memberships.each do |m| %>
       <% if m.valid? %>
-      <li><%= link_to m.chorus.name, chorus_path(m.chorus) %>: <%= get_linked_parts(m) %></li>
+      <li><%= link_to m.chorus.name, chorus_path(m.chorus) %>: <%= get_linked_parts(m, local_assigns[:chorus] ? chorus : nil) %></li>
       <% end %>
     <% end %>
   </ul>

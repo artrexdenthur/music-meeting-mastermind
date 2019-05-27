@@ -1,4 +1,4 @@
 <h1><%= @chorus.name %> Tenors</h1>
 <%= render @tenors %>
 <br>
-<%= button_to "All members", chorus_members_path(@chorus), class: "btn" %>
+<%= button_to "All members", chorus_members_path(@chorus), class: "btn", method: :get  %>

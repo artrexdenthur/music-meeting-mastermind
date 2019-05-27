@@ -4,10 +4,11 @@ module MembershipsHelper
     return get_parts(membership).map { |p| p.to_s.capitalize }.join(', ')
   end
 
-  def get_linked_parts(membership)
+  def get_linked_parts(membership, chorus)
     link_arr = []
+    target = chorus ? "/choruses/#{chorus.id}/" : "/singers/"
     get_parts(membership).each do |p|
-      link_arr << link_to(p.to_s.capitalize, "/choruses/#{membership.chorus_id}/#{p.to_s.pluralize}")
+      link_arr << link_to(p.to_s.capitalize, "#{target}#{p.to_s.pluralize}")
     end
     return safe_join(link_arr, ', '.html_safe)
   end
@@ -33,7 +34,7 @@ module MembershipsHelper
   end
 
   def chorus_admin(chorus)
-    current_user.choruses.include?(chorus) || current_user.admin
+    user_signed_in? && (current_user.choruses.include?(chorus) || current_user.admin)
   end
   
 end
