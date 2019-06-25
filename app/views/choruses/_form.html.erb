@@ -1,0 +1,10 @@
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <% 10.times do %>
+    <%= f.fields_for :members do |mem_f| %>
+      <span><%= mem_f.collection_select :singer_id, Singer.all, :id, :name, {include_blank: true, prompt: 'Select member'}, {class: 'browser-default'} %></span>
+      <%= render 'singers/parts', membership_form: mem_f %>
+    <% end %>
+  <%= f.hidden_field :user_id %>
+  <% end %>

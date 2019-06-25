@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2019_05_27_145128) do
 
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.integer "profile_id"
+    t.integer "profile_id" # Not being used
     t.boolean "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

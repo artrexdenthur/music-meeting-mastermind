@@ -17,6 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     byebug
 
     super do |user|
+      byebug
       if user.profile.memberships.count == 0
         user.profile.memberships.build
       end
@@ -52,7 +53,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up) do |user|
-      user.permit(:email, :password, :password_confirmation, profile_attributes: [:name, :preferred_voice_part, memberships_attributes: [:chorus_id, :baritone, :bass, :lead, :tenor]])
+      user.permit(:email, :password, :password_confirmation, :singer_id, profile_attributes: [:name, :preferred_voice_part, :id, memberships_attributes: [:chorus_id, :baritone, :bass, :lead, :tenor]])
     end
   end
 

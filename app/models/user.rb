@@ -3,8 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook]
-  has_one :profile, class_name: 'Singer', dependent: :destroy
+  has_one :profile, class_name: 'Singer'
   accepts_nested_attributes_for :profile, reject_if: :all_blank
+  
   after_initialize :init_profile
   has_many :singers
   has_many :choruses
@@ -20,5 +21,14 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
     end
+  end
+
+  def singer_id=(id)
+    s = Singer.find_by_id(id)
+    profile = s
+  end
+
+  def singer_id
+
   end
 end

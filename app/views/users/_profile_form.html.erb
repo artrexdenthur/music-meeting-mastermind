@@ -1,0 +1,2 @@
+<h6>Select an existing profile:</h6>
+      <span><%= f.collection_select :singer_id, Singer.unclaimed, :id, :name, {include_blank: true, prompt: 'Select member'}, {class: 'browser-default'} %></span> # look up JS to turn a text field into something like select OR html list attribute to a text box (with the latter the rails id integration falls away)

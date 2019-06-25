@@ -23,7 +23,11 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  
+  <%= render 'users/profile_form', f: f %>
+
   <%= f.fields_for :profile do |pro_f| %>
+    <h6>OR Enter your name and affiliations:</h6>
     <%= render 'singers/form', f: pro_f %>
   <% end %>
 
