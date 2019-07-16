@@ -38,6 +38,7 @@ sor.memberships.find_or_create_by(lead: true, singer_id: lead_mike.id)
 sor.memberships.find_or_create_by(tenor: true, singer_id: tenor_doug.id)
 sor.memberships.find_or_create_by(tenor: true, singer_id: tb.id)
 sor.memberships.find_or_create_by(lead: true, singer_id: bl.id)
+puts vm.save
 vm.memberships.find_or_create_by(bass: true, singer_id: tb.id)
 wc.memberships.find_or_create_by(baritone: true, singer_id: bl.id)
 

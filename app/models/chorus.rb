@@ -8,6 +8,7 @@ class Chorus < ApplicationRecord
   validates :name, presence: true
   belongs_to :user # either this to designate owner, or a chorus_role join model to designate who has modify permissions on the chorus
   accepts_nested_attributes_for :memberships
+  validates :name, presence: true
 
   def self.leads
     joins(:memberships).where(memberships: {lead: true})
