@@ -14,7 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     configure_sign_up_params
-    byebug
+    # byebug
 
     super do |user|
       if user.profile.memberships.count == 0

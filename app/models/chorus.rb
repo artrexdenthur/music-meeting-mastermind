@@ -6,6 +6,7 @@ class Chorus < ApplicationRecord
   has_many :baritones, -> {baritones.distinct}, through: :memberships, source: :singer # '->' adds a scope to the association
   has_many :tenors, -> {tenors.distinct}, through: :memberships, source: :singer # '->' adds a scope to the association
   belongs_to :user # either this to designate owner, or a chorus_role join model to designate who has modify permissions on the chorus
+  validates :name, presence: true
 
   def self.leads
     joins(:memberships).where(memberships: {lead: true})

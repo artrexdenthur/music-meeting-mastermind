@@ -7,6 +7,7 @@ class ChorusesController < ApplicationController
 
   def new
     # require user login
+    redirect_to choruses_path unless user_signed_in?
     @chorus = Chorus.new
   end
 
