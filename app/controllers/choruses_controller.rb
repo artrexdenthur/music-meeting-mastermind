@@ -25,6 +25,16 @@ class ChorusesController < ApplicationController
 
   def show
     @chorus = Chorus.find_by_id(params[:id])
+    respond_to do |format|
+      format.html {
+        unless @chorus
+          flash.notice = "Resource does not exist."
+          redirect_to 'index'
+        end
+        render 'show'
+      }
+      format.json
+    end
     unless @chorus
       flash.notice = "Resource does not exist."
       redirect_to 'index'
