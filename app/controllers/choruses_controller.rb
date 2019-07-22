@@ -29,15 +29,13 @@ class ChorusesController < ApplicationController
       format.html {
         unless @chorus
           flash.notice = "Resource does not exist."
-          redirect_to 'index'
+          return redirect_to choruses_path
         end
         render 'show'
       }
-      format.json
-    end
-    unless @chorus
-      flash.notice = "Resource does not exist."
-      redirect_to 'index'
+      format.json do
+        render json: @chorus.to_json(include: :memberships)
+      end
     end
   end
 
