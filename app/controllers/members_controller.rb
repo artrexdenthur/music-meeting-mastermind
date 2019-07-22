@@ -8,6 +8,7 @@ class MembersController < ApplicationController
   def show
     @chorus, @singer = Chorus.find_by_id(params[:chorus_id]), Singer.find_by_id(params[:id])
     @membership = @singer.memberships.find_by(chorus_id: @chorus.id)
+    return redirect_to chorus_path(@chorus) unless @membership
     # byebug
   end
 
