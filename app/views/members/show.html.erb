@@ -1,3 +1,5 @@
 <h1><%= @chorus.name%>: <%= @singer.name %></h1>
 <h2><%= get_linked_parts(@membership, @chorus) %></h2>
+<h4><strong>Age:</strong> <%=@singer.age%></h4>
+<h4><strong>Description:</strong> <%=@singer.description%></h4>
 <%= gated_edit_button @singer, edit_chorus_member_path(@chorus, @singer) %>

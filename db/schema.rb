@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_145128) do
+ActiveRecord::Schema.define(version: 2019_07_17_215311) do
 
   create_table "choruses", force: :cascade do |t|
     t.string "name"
@@ -38,11 +38,13 @@ ActiveRecord::Schema.define(version: 2019_05_27_145128) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "age"
+    t.text "description"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.integer "profile_id" # Not being used
+    t.integer "profile_id"
     t.boolean "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
