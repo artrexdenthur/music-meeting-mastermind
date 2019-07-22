@@ -6,7 +6,9 @@
 
 <% end %> 
 
-<%= button_to "Create New Chorus", new_chorus_path, class: "btn", method: :get %>
+<% if user_signed_in? %>
+  <%= button_to "Create New Chorus", new_chorus_path, class: "btn", method: :get %>
+<% end %>
 
 <script type="javascript" encoding="utf-8">
   <%# let f = JSON.get(chorus info) %>
