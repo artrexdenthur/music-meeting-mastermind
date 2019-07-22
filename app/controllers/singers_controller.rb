@@ -22,9 +22,15 @@ class SingersController < ApplicationController
 
   def show
     @singer = Singer.find_by_id(params[:id])
-    unless @singer
-      flash.notice = "Resource does not exist."
-      redirect_to 'index'
+    respond_to do |format|
+      format.html {
+        unless @singer
+          flash.notice = "Resource does not exist."
+          redirect_to 'index'
+        end
+        render :show 
+      }
+      format.json { render json: @singer, include: {choruses: { only: [:name, :id ]}}, status: 200 }
     end
   end
 

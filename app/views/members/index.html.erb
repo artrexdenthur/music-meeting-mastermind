@@ -5,3 +5,35 @@
 <% end %>
 
 &nbsp;
+<script type="text/javascript">
+// jquery turbolinks equivalent to document load
+$( document ).on("turbolinks:load", function () {
+
+})
+// vjs turbolinks equivalent "" "" 
+document.addEventListener("turbolinks:load", function() {
+
+})
+$(function () {
+  $(".expand-singer").each(function() {
+    $(this).on('click', function() {
+      let arrow = $(this).text()
+      if (arrow === "expand_more") {
+        const id = $(this).data("singerid")
+        let that = this;
+        getSinger(id, function(data) {
+          
+        }
+        $.get(`/singers/${id}.json`, function (data) {
+         $( `<p class="expand-info-singer">Description: ${data["description"]}</p>` ).insertAfter($( that ).parent());
+         $( `<p class="expand-info-singer">Age: ${data["age"]}</p>` ).insertAfter($( that ).parent());
+        })
+        $(this).text("expand_less") 
+      } else {
+        $(this).text("expand_more")
+        $(this).parent().siblings().filter(".expand-info-singer").remove()
+      }
+    })
+  })
+})
+</script>
