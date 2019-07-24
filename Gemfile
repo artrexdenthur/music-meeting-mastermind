@@ -37,6 +37,9 @@ gem 'devise'
 # Use OmniAuth for third-party authentication
 gem 'omniauth-facebook'
 
+# Use ActiveModel::Serializers
+gem 'active_model_serializers'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

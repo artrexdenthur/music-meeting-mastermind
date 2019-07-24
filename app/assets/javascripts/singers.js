@@ -25,7 +25,7 @@ class Singer {
       if (counts[key] > max) {
         max = counts[key];
         resp = key.charAt(0).toUpperCase() + key.slice(1);
-      } else if (counts[key] === max) {
+      } else if (counts[key] === max && max > 0) {
         resp += `, ${key.charAt(0).toUpperCase() + key.slice(1)}`
       }
 
