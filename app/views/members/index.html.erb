@@ -1,3 +1,4 @@
+
 <h1><%= @chorus.name %> Membership</h1>
 <%= render @singers, chorus: @chorus %>
 <% if chorus_admin(@chorus) %>
@@ -21,12 +22,13 @@ $(function () {
       if (arrow === "expand_more") {
         const id = $(this).data("singerid")
         let that = this;
-        getSinger(id, function(data) {
-          
-        }
-        $.get(`/singers/${id}.json`, function (data) {
-         $( `<p class="expand-info-singer">Description: ${data["description"]}</p>` ).insertAfter($( that ).parent());
-         $( `<p class="expand-info-singer">Age: ${data["age"]}</p>` ).insertAfter($( that ).parent());
+        let m = new Mastermind;
+        m.getSinger(id, function (singer) {
+          // console.log(singer)
+          // console.log(singer.mostCommonParts())
+         $( `<p class="expand-info-singer">Description: ${singer.description}</p>` ).insertAfter($( that ).parent());
+         $( `<p class="expand-info-singer">Age: ${singer.age}</p>` ).insertAfter($( that ).parent());
+         $( `<p class="expand-info-singer">Favored Part: ${singer.mostCommonParts()}</p>` ).insertAfter($( that ).parent());
         })
         $(this).text("expand_less") 
       } else {

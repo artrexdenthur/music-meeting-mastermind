@@ -30,7 +30,17 @@ class SingersController < ApplicationController
         end
         render :show 
       }
-      format.json { render json: @singer, include: {choruses: { only: [:name, :id ]}}, status: 200 }
+      format.json { 
+        render json: @singer, 
+        except: [:created_at, :updated_at], 
+        include: { 
+          memberships: { 
+            only: [:section_leader, :baritone, :bass, :lead, :tenor], 
+            include: [ chorus: { only: [:id, :name]} ]
+            } 
+          }, 
+        status: 200 
+      }
     end
   end
 
