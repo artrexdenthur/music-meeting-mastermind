@@ -1,1 +1,29 @@
-<h1><%=@user.username%></h1>
+<div class="card">
+  <div class="card-content">
+    <h1 class="card-title"><%= available_username(@user) %></h1>
+  </div>
+  <div class="card-tabs">
+    <ul class="tabs">
+      <li class="user tab"><a href="#card-profile">Profile</a></li>
+      <li class="user tab"><a href="#card-choruses">Choruses</a></li>
+      <% if current_user == @user %>
+        <li class="user tab"><a href="#card-account">Account</a></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="card-content content" data-userid="<%=@user.id%>">
+    <p></p>
+  </div>
+<!-- list of choruses -->
+<script type="text/javascript" encoding="utf-8">
+  $(".card-content.content").on("turbolinks:load", function() {
+    let m = new Mastermind;
+    m.getSinger()
+  })
+  $(".user.tab").each(function() {
+    $(this).on('click', function() {
+      event.preventDefault();
+
+    })
+  })
+</script>
