@@ -15,4 +15,18 @@ class Mastermind {
       func(singer)
     })
   }
+
+  getUser(id, func) {
+    $.get(`/users/${id}.json`, function(data) {
+      let user = new User ({
+        id: data["id"],
+        email: data["email"],
+        username: data["username"],
+        profile: data["profile"],
+        choruses: data["choruses"],
+        singers: data["singers"]
+      })
+      func(user)
+    })
+  }
 }

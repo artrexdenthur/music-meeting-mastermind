@@ -62,21 +62,41 @@ class SingersController < ApplicationController
 
   def update
     @singer = Singer.find_by_id(params[:id])
-    unless @singer
-      flash.notice = "resource does not exist"
-      return redirect_to root_path
-    end
-    unless user_signed_in? && (@singer.user == current_user || current_user.admin)
-      flash.warning = "Action not authorized"
-      return redirect_to singer_path(@singer)
-    else
-      @singer.update(singer_params)
-      unless @singer.save
-        # byebug
-        render 'edit'
-      else
-        return redirect_to singer_path(@singer)
-      end
+    respond_to do |format|
+      format.html {
+        unless @singer
+          flash.notice = "resource does not exist"
+          return redirect_to root_path
+        end
+        unless user_signed_in? && (@singer.user == current_user || current_user.admin)
+          flash.warning = "Action not authorized"
+          return redirect_to singer_path(@singer)
+        else
+          @singer.update(singer_params)
+          unless @singer.save
+            # byebug
+            render 'edit'
+          else
+            return redirect_to singer_path(@singer)
+          end
+        end
+      }
+      format.json {
+        unless @singer
+          return render json: { error: "not-found" }.to_json, status: 404
+        end
+        unless user_signed_in? && (@singer.user == current_user || current_user.admin) 
+          return render json: { error: "action-not-authorized" }.to_json, status: 401
+        else
+          byebug
+          @singer.update(singer_params)
+          unless @singer.save
+            return render json: { errors: @singer.errors.full_messages }, status: 422
+          else
+            render json: @singer
+          end
+        end
+      }
     end
   end
 
@@ -104,7 +124,7 @@ class SingersController < ApplicationController
 
   def singer_params 
     params.require(:singer).permit(
-      :name, :preferred_voice_part, :id,
+      :name, :preferred_voice_part, :id, :age, :description,
       memberships_attributes: [
         :id,
         :singer_id,

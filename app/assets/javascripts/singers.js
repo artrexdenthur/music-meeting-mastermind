@@ -1,11 +1,15 @@
 class Singer {
-  constructor({ id, name=null, age=null, user_id=null, description="", memberships=[] }) {
+  constructor({ id, name=null, age=null, user_id=null, description="", preferred_voice_part="", memberships=[] }) {
     this.id = id;
     this.name = name;
     this.age = age;
     this.user_id = user_id;
     this.description = description;
-    this.memberships = memberships;
+    this.preferred_voice_part = (preferred_voice_part ? this.preferred_voice_part : "None")
+    this.memberships = [];
+    memberships.forEach(membership => {
+      this.memberships.push(new Membership(membership))
+    })
 
   }
 

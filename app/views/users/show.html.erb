@@ -1,29 +1,32 @@
 <div class="card">
-  <div class="card-content">
-    <h1 class="card-title"><%= available_username(@user) %></h1>
-  </div>
   <div class="card-tabs">
     <ul class="tabs">
-      <li class="user tab"><a href="#card-profile">Profile</a></li>
-      <li class="user tab"><a href="#card-choruses">Choruses</a></li>
-      <% if current_user == @user %>
-        <li class="user tab"><a href="#card-account">Account</a></li>
-      <% end %>
+      <li class="user tab active" id="profile"><a class="active" href="#">Profile</a></li>
+      <li class="user tab" id="choruses"><a href="#">Choruses Managed</a></li>
+      <li class="user tab" id="memberships"><a href="#">Chorus Memberships</a></li>
     </ul>
   </div>
-  <div class="card-content content" data-userid="<%=@user.id%>">
-    <p></p>
+  <div class="card-content content " data-userid="<%=@user.id%>">
   </div>
+  <% if current_user == @user %>
+    <%= button_to "Edit My Account", user_path(@user), params: { view: "false"}, class: "btn", method: :get %>
+  <% end %>
+</div>
+
 <!-- list of choruses -->
 <script type="text/javascript" encoding="utf-8">
-  $(".card-content.content").on("turbolinks:load", function() {
+  $(document).on("turbolinks:load", function() {
+    let tabs = M.Tabs.init($('.tabs'))
     let m = new Mastermind;
-    m.getSinger()
-  })
-  $(".user.tab").each(function() {
-    $(this).on('click', function() {
-      event.preventDefault();
-
+    let id = $(".content").data("userid")
+    m.getUser(id, function(user) {
+      $(".content").append(user.renderShow("profile"))
+      $(".user.tab").each(function() {
+        $(this).on('click', function(event) {
+          event.preventDefault();
+          $(".content").empty().append(user.renderShow(this.id))
+        })
+      })
     })
   })
 </script>
