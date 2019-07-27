@@ -88,7 +88,6 @@ class SingersController < ApplicationController
         unless user_signed_in? && (@singer.user == current_user || current_user.admin) 
           return render json: { error: "action-not-authorized" }.to_json, status: 401
         else
-          byebug
           @singer.update(singer_params)
           unless @singer.save
             return render json: { errors: @singer.errors.full_messages }, status: 422

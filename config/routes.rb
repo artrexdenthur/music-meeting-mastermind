@@ -20,5 +20,7 @@ Rails.application.routes.draw do
     end
   end
   resources :users, only: [:index, :show]
+  get "/users/:id/edit_memberships", to: "users#edit_memberships"
+  get "/users/:id/new_membership", to: "users#new_membership"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

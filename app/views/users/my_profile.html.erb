@@ -5,22 +5,14 @@
       <li class="user tab" id="choruses"><a href="#">Choruses Managed</a></li>
       <li class="user tab" id="memberships"><a href="#">Chorus Memberships</a></li>
       <li class="user tab" id="account"><a href="#">Account</a></li>
+      <%= button_to "View My Account", user_path(@user), class: "btn right", method: :get, params: {view: "true"}%>
     </ul>
   </div>
   <div class="card-content content " data-userid="<%=@user.id%>">
-    <%= form_for @user do |f| %>
-      <%= f.label :username %>
-      <%= f.text_field :username %>
-      <%= fields_for :profile, @user.profile do |profile_fields| %>
-        <%= profile_fields.label :name %>
-        <%= profile_fields.text_field :name %>
-      <% end %>
-    <% end %>
-    <%= form_tag "", id: "edit_user_account", method: "PUT" do %>
+    <%= form_tag "", id: "edit_user_account", data: { userid: "#{@user.id}" }, method: "PUT" do %>
       <div class="form_fields"></div>
     <% end %>
   </div>
-  <%= button_to "View My Account", user_path(@user), class: "btn", method: :get, params: {view: "true"}%>
 </div>
 
 <!-- list of choruses -->

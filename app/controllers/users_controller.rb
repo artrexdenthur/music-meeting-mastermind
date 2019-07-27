@@ -19,4 +19,16 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
+
+  def edit_memberships
+    @user = User.find_by_id(params[:id])
+
+    render partial: 'mem_form' 
+  end
+
+  def new_membership
+    @user = User.find_by_id(params[:id])
+    @mem = @user.profile.memberships.build
+    render partial: 'new_mem_form', locals: {memberships: @mem }
+  end
 end

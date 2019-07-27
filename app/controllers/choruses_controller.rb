@@ -13,13 +13,28 @@ class ChorusesController < ApplicationController
   def create
     @chorus = Chorus.create(chorus_params)
     # byebug
-    return redirect_to choruses_path unless user_signed_in? && (@chorus.user == current_user || current_user.admin)
-    unless @chorus.save
-      flash.notice = "Errors have occurred."
-      return render 'new'
-    else
-      # byebug
-      return redirect_to chorus_path(@chorus)
+    respond_to do |format| 
+      format.html {
+        return redirect_to choruses_path unless user_signed_in? && (@chorus.user == current_user || current_user.admin)
+        unless @chorus.save
+          flash.notice = "Errors have occurred."
+          return render 'new'
+        else
+          # byebug
+          return redirect_to chorus_path(@chorus)
+        end
+      }
+      format.json {
+        unless user_signed_in? && (@chorus.user == current_user || current_user.admin)
+            return render json: {error: "action-not-authorized" }.to_json, status: 401
+        else
+          unless @chorus.save
+            return render json: {errors: @chorus.errors.full_messages }, status: 422
+          else
+            render json: @chorus
+          end
+        end
+      }
     end
   end
 

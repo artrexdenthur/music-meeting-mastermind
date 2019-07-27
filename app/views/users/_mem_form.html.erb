@@ -1,0 +1,32 @@
+<%= form_for @user.profile do |f| %>
+  <%= f.fields_for :memberships do |mem_f| %>
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title"><%= mem_f.collection_select :chorus_id, Chorus.all, :id, :name, {include_blank: true, prompt: 'Select chorus'}, {class: 'browser-default'} %></span>
+
+        <%= render 'singers/parts', membership_form: mem_f %>
+      </div>
+    </div>
+
+    <div class="new_memberships">
+    </div>
+  <% end %>
+  <%= link_to "New Membership", "", class: "btn", id: "new_membership" %>
+  <%= f.button "Update Memberships", class: "btn" %>
+<% end %>
+
+<% form_for @user.profile do |f| %>
+  <%= f.fields_for :memberships do |mem_f| %>
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title"><%= mem_f.collection_select :chorus_id, Chorus.all, :id, :name, {include_blank: true, prompt: 'Select chorus'}, {class: 'browser-default'} %></span>
+
+        <%= render 'singers/parts', membership_form: mem_f %>
+      </div>
+    </div>
+
+    <div class="hide">
+    </div>
+  <% end %>
+  <%= f.button "Update Memberships", class: "btn" %>
+<% end %>

@@ -5,7 +5,7 @@ class Singer {
     this.age = age;
     this.user_id = user_id;
     this.description = description;
-    this.preferred_voice_part = (preferred_voice_part ? this.preferred_voice_part : "None")
+    this.preferred_voice_part = (preferred_voice_part ? preferred_voice_part : "None")
     this.memberships = [];
     memberships.forEach(membership => {
       this.memberships.push(new Membership(membership))

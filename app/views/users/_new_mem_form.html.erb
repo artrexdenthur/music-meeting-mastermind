@@ -1,0 +1,15 @@
+<%= form_for @user.profile do |f| %>
+  <%# be sure to pass a memberships variable %>
+  <%= f.fields_for memberships do |mem_f| %>
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title"><%= mem_f.collection_select :chorus_id, Chorus.all, :id, :name, {include_blank: true, prompt: 'Select chorus'}, {class: 'browser-default'} %></span>
+
+        <%= render 'singers/parts', membership_form: mem_f %>
+      </div>
+    </div>
+
+    <div class="hide">
+    </div>
+  <% end %>
+<% end %>

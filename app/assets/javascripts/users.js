@@ -70,44 +70,96 @@ class User {
       </div>
       <p>Most Common Part: ${this.profile.mostCommonParts()}</p>
       <br>
-      <input type="Submit"></input> 
+      <button class="btn waves-effect waves-light" type="Submit">Submit Changes</button> 
     `);
     let that = this;
-    $(selector).closest("form").submit(function(event) {
+    $("form#edit_user_account").unbind("submit").submit(function(event) {
       event.preventDefault();
-      console.log(this)
       let values = $(this).serialize();
-      console.log("submit")
       $.post(`/singers/${that.profile.id}.json`, values)
         .done(function(data){
-          console.log(data)
         })
         .fail(function(data){
-          console.log(data)
         })
     })
   }
 
   renderChorusForm(selector) {
-    $(selector).empty().append(``)
-
     let that = this;
-    $(`${selector} button`).on("click", function(event) {
+    $("form#edit_user_account").unbind("submit").submit(function (event) {
+
       event.preventDefault()
+      let values = $(this).serialize();
+      $.post(`/choruses/create.json`, values)
+        .done(function(data){
+        })
+        .fail(function(data){
+        })
+      renderChorusSplash($(this).find(".chorus_creator").data("selector"))
     })
-    $(selector).closest("form").submit(function(event) {
-      event.preventDefault();
-    })
+    let renderChorusSplash = function(selector) {
+      $(selector).empty().append(`
+        ${that.renderShow("choruses")}
+        <br>
+        <div class="chorus_creator" data-selector="${selector}">
+          <a class="btn" id="new_chorus">Add New Chorus</a>
+        </div>
+      `)
+      $(`${selector} a#new_chorus`).on("click", function(event) {
+        event.preventDefault();
+        renderNewChorus("div.chorus_creator")
+      })
+    }
+    let renderNewChorus = function(new_sel) {
+      let newChorusFields = `
+      <strong>New Chorus:</strong>
+      <input type="hidden" name="chorus[user_id]" value="${that.id}" />
+      <div class="input-field">
+        <label for="chorus[name]">Name</label>
+        <input type="text" name="chorus[name]" id="chorus_name" />
+      </div>
+        <br>
+        <button class="btn" type="submit" id="submit_chorus" >Submit</button>
+        <a class="btn" id="cancel">Cancel</a>
+      `
+      $( new_sel ).empty().append(newChorusFields)
+      $( new_sel ).children("a#cancel").on("click", function(){
+        renderChorusSplash($( this ).closest(".chorus_creator").data( "selector" ))
+      });
+    } 
+
+    let submitNewChorus = function(event) {
+      event.preventDefault()
+      values = this.serialize();
+      console.log(values);
+      // $.post(`/choruses/create.json`, values)
+      //   .done(function(data){
+      //   })
+      //   .fail(function(data){
+      //   })
+      renderChorusSplash($(this).find(".chorus_creator").data("selector"))
+    }
+
+    renderChorusSplash(selector);
+
   }
 
   renderMembershipsForm(selector) {
-    $(selector).empty().append(``)
-
     let that = this;
+    $.get(`/users/${this.id}/edit_memberships`).done(function(result) {
+      $(selector).empty().append(result)
+      $.get(`/users/${that.id}/new_membership`).done(function(result){
+        $(selector).find("div.new_memberships").append(result)
+      })
+    })
+    console.log(selector)
+    $(`${selector} a`).on("click", function(event) {
+      event.preventDefault()
+    })
     $(`${selector} button`).on("click", function(event) {
       event.preventDefault()
     })
-    $(selector).closest("form").submit(function(event) {
+    $(selector).find("form").submit(function(event) {
       event.preventDefault();
     })
   }
