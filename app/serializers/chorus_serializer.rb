@@ -11,7 +11,7 @@ class ChorusSerializer < ActiveModel::Serializer
         :lead,
         :tenor
       )
-      custom_membership[:member] = m.singer.slice (
+      custom_membership[:member] = m.singer.slice(
         :id,
         :name,
         :age,
