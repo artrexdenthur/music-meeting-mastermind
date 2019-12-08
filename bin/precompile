@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+SECRET_KEY_BASE='bin/rake secret' RAILS_ENV='production' rake assets:precompile
