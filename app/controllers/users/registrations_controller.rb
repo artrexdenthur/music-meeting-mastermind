@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # byebug
 
     super do |user|
-      byebug
+      # byebug
       if user.profile.memberships.count == 0
         user.profile.memberships.build
       end
